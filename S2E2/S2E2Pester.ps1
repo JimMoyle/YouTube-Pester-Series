@@ -26,7 +26,7 @@ Update-Module Pester
 $moduleInfo = Find-Module -Name Pester
 
 #what does it tell us?
-$moduleinfo | Format-List *
+$moduleinfo | Format-List * | more
 
 #supported powershell version
 $moduleInfo.AdditionalMetadata.PowerShellVersion
@@ -47,7 +47,7 @@ Update-Module -Name Pester
 Get-Module -ListAvailable -Name Pester
 
 #What does it look like on the filesystem?
-Invoke-Item -Path C:\Program Files\WindowsPowerShell\Modules\Pester
+Invoke-Item -Path 'C:\Program Files\WindowsPowerShell\Modules\Pester'
 
 #Does Powershell import the righht version?
 Import-Module -Name Pester
