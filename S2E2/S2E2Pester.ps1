@@ -19,7 +19,8 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
 #See if Pester is there by default
 Get-Module -ListAvailable -Name Pester
 
-#Pester on the web
+#Can't update it?
+Update-Module Pester
 
 #Look for Pester in PSGallery
 $moduleInfo = Find-Module -Name Pester
