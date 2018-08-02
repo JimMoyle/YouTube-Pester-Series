@@ -54,4 +54,4 @@ Import-Module -Name Pester
 Get-Command -Module Pester
 
 #Start creating a function
-New-Fixture -Path .\S2E1\New-Fixture -Name 'Test-Me'
+New-Fixture -Path .\S2E2\New-Fixture -Name 'Test-Me'
