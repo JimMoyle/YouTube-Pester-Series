@@ -11,6 +11,7 @@
 
 # Current tested version PoSh and Windows
 $psversiontable.PSVersion
+Get-ComputerInfo -Property WindowsVersion
 
 #Just in case it's not already done.
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
