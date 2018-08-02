@@ -1,4 +1,4 @@
-﻿#What does $here and $sut do?
+﻿#What do $here and $sut do?
 
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path) -replace '\.Tests\.', '.'
