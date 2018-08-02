@@ -1,4 +1,6 @@
-﻿$here = Split-Path -Parent $MyInvocation.MyCommand.Path
+﻿#What does $here and $sut do?
+
+$here = Split-Path -Parent $MyInvocation.MyCommand.Path
 $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path) -replace '\.Tests\.', '.'
 . "$here\$sut"
 
@@ -11,6 +13,7 @@ Describe "Test-Me" {
         #If any exception occurs within an It block the test will fail
         $true | Should -Be $false
 
-        $true | Should -Be $true
+        #See what a passing test looks like
+        #$true | Should -Be $true
     }
 }
