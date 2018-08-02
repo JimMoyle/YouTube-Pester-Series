@@ -9,7 +9,7 @@
 
 #Requires -RunAsAdministrator
 
-# Current tested version and pre-reqs
+# Current tested version PoSh and Windows
 $psversiontable.PSVersion
 
 #Just in case it's not already done.
