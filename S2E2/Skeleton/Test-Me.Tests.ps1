@@ -11,9 +11,9 @@ Describe "Test-Me" {
         #Should is the assertion within an It block, can have many, but probably not a good idea
         #A failing test will throw an exception
         #If any exception occurs within an It block the test will fail
-        $true | Should -Be $false
+        #$true | Should -Be $false
 
         #See what a passing test looks like
-        #$true | Should -Be $true
+        $true | Should -Be $true
     }
 }
