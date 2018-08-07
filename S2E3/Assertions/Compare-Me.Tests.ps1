@@ -166,16 +166,89 @@ Describe "Should Assertion tests" {
     $actual.GetType()
 
     It "Tests Should -BeOfType: Test will pass" {
-        $actual | Should -BeOfType System.IO.DirectoryInfo
+        $actual | Should -BeOfType [System.IO.DirectoryInfo]
     }
 
     It "Tests Should -BeOfType: Test will pass" {
-        $actual | Should -BeOfType System.IO.FileSystemInfo
+        $actual | Should -BeOfType [System.IO.FileSystemInfo]
     }
 
     It "Tests Should -BeOfType: Test will pass" {
-        $actual | Should -Not -BeOfType System.IO.FileSystemInfo
+        $actual | Should -Not -BeOfType [System.IO.FileInfo]
     }
+
+    $customObject = [PSCustomObject]@{
+        PSTypeName = 'MadeUp.Type'
+        SomeName   = 'SomeValue'
+    }
+
+    It "Tests Should -BeOfType: Test will fail" {
+        $customObject | Should -BeOfType [MadeUp.Type]
+    }
+
+    It "Tests Should -BeOfType Sorta: Test will pass" {
+        $customObject.pstypenames.Item('0') | Should -Be 'MadeUp.Type'
+    }
+
+    # Should -BeTrue
+    # Uses If(){} from PowerShell under the hud
+    # Jeffery Snover on If
+    # https://blogs.msdn.microsoft.com/powershell/2006/12/24/boolean-values-and-operators/
+
+    It "Tests Should -BeTrue: Test will pass" {
+        $true | Should -BeTrue
+    }
+
+    It "Tests Should -BeTrue: Test will pass" {
+        1 | Should -BeTrue
+    }
+
+    It "Tests Should -BeTrue: Test will pass" {
+        1, 2, 3 | Should -BeTrue
+    }
+
+    It "Tests Should -BeTrue: Test will pass" {
+        Get-Process -Name 'Code' -ErrorAction SilentlyContinue | Should -BeTrue
+    }
+
+    # Do we need -BeTrue?
+
+    It "Tests Should -Be Test will pass" {
+        $true | Should -Be $true
+    }
+
+    It "Tests Should -BeTrue: Test will pass" {
+        1 | Should -Be $true
+    }
+
+    It "Tests Should -BeTrue: Test will pass" {
+        1, 2, 3 | Should -Be $true
+    }
+
+    It "Tests Should -BeTrue: Test will pass" {
+        Get-Process -Name 'Code' -ErrorAction SilentlyContinue | Should -Be $true
+    }
+
+    # Should -BeFalse
+
+    It "Tests Should -BeFalse: Test will pass" {
+        $false | Should -BeFalse
+    }
+
+    It "Tests Should -BeFalse: Test will pass" {
+        0 | Should -BeFalse
+    }
+
+    It "Tests Should -BeFalse: Test will pass" {
+        $null | Should -BeFalse
+    }
+
+    # Not using if here, just picking up the exception
+    It "Tests Should -BeFalse Get-Process -Name 'NotExist': Test will pass" {
+        Get-Process -Name 'NotExist' | Should -BeFalse
+    }    
+
+    # Should -HaveCount
     
 
 }
