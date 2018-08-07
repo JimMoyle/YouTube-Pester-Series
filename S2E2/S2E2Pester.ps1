@@ -13,47 +13,47 @@
 $psversiontable.PSVersion
 Get-ComputerInfo -Property WindowsVersion
 
-#Just in case it's not already done.
+# Just in case it's not already done.
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
 
-#See if Pester is there by default
+# See if Pester is there by default
 Get-Module -ListAvailable -Name Pester
 
-#Can't update it?
+# Can't update it?
 Update-Module Pester
 
-#Look for Pester in PSGallery
+# Look for Pester in PSGallery
 $moduleInfo = Find-Module -Name Pester
 
-#what does it tell us?
+# What does it tell us?
 $moduleinfo | Format-List * | more
 
-#supported powershell version
+# Supported powershell version
 $moduleInfo.AdditionalMetadata.PowerShellVersion
 
-#look at documention
+# Look at documention
 Start-Process $moduleinfo.ProjectUri
 
-#look at PS Gallery
+# Look at PS Gallery
 Start-Process 'https://www.powershellgallery.com/packages/Pester/'
 
-#Cert is different from PS Gallery so we need to do some additional parameters
+# Cert is different from PS Gallery so we need to do some additional parameters
 Install-Module -Name Pester -Force -SkipPublisherCheck
 
-#Now you can update the module
+# Now you can update the module
 Update-Module -Name Pester
 
-#Now what do we see?
+# Now what do we see?
 Get-Module -ListAvailable -Name Pester
 
-#What does it look like on the filesystem?
+# What does it look like on the filesystem?
 Invoke-Item -Path 'C:\Program Files\WindowsPowerShell\Modules\Pester'
 
-#Does Powershell import the righht version?
+# Does Powershell import the righht version?
 Import-Module -Name Pester
 
-#Quick look at the commands
+# Quick look at the commands
 Get-Command -Module Pester
 
-#Start creating a function
+# Start creating a function
 New-Fixture -Path .\S2E2\New-Fixture -Name 'Test-Me'
