@@ -294,13 +294,119 @@ Describe 'Should Assertion tests' {
         $actual | Should -Exist
     }
 
-    #For Paths with wildcard characters
+    # For Paths with wildcard characters
 
     It 'Tests Paths with widcards Test will pass' {
         Test-Path -LiteralPath $actual | Should -Be $true
     }
+
+
+    # Should -Match
+    # Uses PowerShell's -match Operator under the hud.
+    # Regular Expressions are powerful, but can be confusing, use if you know what you are doing
+
+    It 'Tests -match Test will pass' {
+        "I am a value" | Should -Match "I Am"
+    }
+
+    It 'Tests -match Test will fail' {
+        "I am a value" | Should -Match "I am a bad person"
+    }
+
+
+    # In the docs, there is the following tip......
+    # Tip: Use [regex]::Escape("pattern") to match the exact text.
+    # If you need to match the exact text, use 'Should -Be'
+
     
-  
+
+    It 'Tests -match Test will pass' {
+        "Greg" | Should -Match ".reg"
+    }
+
+    # This passes as . in Regex matches any character.
+    # So the 'solution' to this is the following:
+
+    It 'Tests -match Test will fail' {
+        "Greg" | Should -Match ([regex]::Escape(".reg"))
+    }
+
+    # I'd say in most cases the following would be better:
+
+    It 'Tests -match Test will fail' {
+        "Greg" | Should -Be ".reg"
+    }
+
+
+
+
+
+
+    
+    # Should -FileContentMatch  
+    # Uses PowerShell's -match Operator under the hud.
+    # Don't worry about the 'TestDrive' you see, we'll cover it later
+
+    Set-Content -Path TestDrive:\file.txt -Value 'I am a file'
+
+    It 'Tests Should -FileContentMatch Test will pass' {
+        'TestDrive:\file.txt' | Should -FileContentMatch 'I Am'
+    }
+
+    It 'Tests Should -FileContentMatch Test will pass' {
+        'TestDrive:\file.txt' | Should -FileContentMatch '^I.*file$'
+    }
+
+    It 'Tests Should -FileContentMatch Test will fail' {
+        'TestDrive:\file.txt' | Should -FileContentMatch 'I Am Not'
+    }
+
+    # Should -FileContentMatchExactly
+    # Uses PowerShell's -cmatch Operator under the hud.
+    # Regular Expressions are *still* powerful, and can still be confusing, use if you know what you are doing
+    # I use https://regex101.com/ a lot to help me
+
+    Set-Content -Path TestDrive:\file.txt -Value 'I am a file.'
+
+    It 'Tests Should -FileContentMatchExactly Test will pass' {
+        'TestDrive:\file.txt' | Should -FileContentMatchExactly 'I am'
+    }
+
+    It 'Tests Should -FileContentMatchExactly Test will fail' {
+        'TestDrive:\file.txt' | Should -FileContentMatchExactly 'I Am'
+    }
+
+    # Should -FileContentMatchMultiline
+    # Uses PowerShell's -match Operator under the hud.
+    # Gets the file into a single string rather than an an array of strings by using 'Get-Content $ActualValue -Delimiter ([char]0)'
+    # Probably because Get-Content -Raw was introduced in PoSh 3.0
+    # Man, if someone asked me to support PoSh 2.0, I'd tell them to take a long walk off a short pier.
+    # Remember to enclose the path in quotes, or be an actual file object or PowerShell will try to invoke the path
+    # When using FileContentMatchMultiline operator, ^ and $ represent the beginning and end of the whole file, instead of the beginning and end of a line.
+
+    $lineOne = 'I am the first line.'
+    $lineTwo = 'I am the second line.'
+
+    Set-Content -Path TestDrive:\file.txt -Value $lineOne
+    Add-Content -Path TestDrive:\file.txt -Value $lineTwo
+
+    It 'Tests Should -FileContentMatchMultiline Test will pass' {
+        'TestDrive:\file.txt' | Should -FileContentMatchMultiline 'first line\.\r?\nI am'
+    }
+
+    It 'Tests Should -FileContentMatchMultiline Test will pass' {
+        'TestDrive:\file.txt' | Should -FileContentMatchMultiline '^I am the first.*\n.*second line\.$'
+    }
+
+    It 'Tests Should -FileContentMatchMultiline Test will pass' {
+        Get-ChildItem -Path TestDrive:\file.txt | Should -FileContentMatchMultiline '^I am the first.*\n.*second line\.$'
+    }
+
+
+
+
+
+
 
     
 }
