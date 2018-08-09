@@ -318,8 +318,6 @@ Describe 'Should Assertion tests' {
     # Tip: Use [regex]::Escape("pattern") to match the exact text.
     # If you need to match the exact text, use 'Should -Be'
 
-    
-
     It 'Tests -match Test will pass' {
         "Greg" | Should -Match ".reg"
     }
@@ -337,9 +335,22 @@ Describe 'Should Assertion tests' {
         "Greg" | Should -Be ".reg"
     }
 
+    # Should -MatchExactly
+    # Uses PowerShell's -cmatch Operator under the hud.
 
+    It 'Tests -MatchExactly Test will pass' {
+        "I am a value" | Should -MatchExactly "I am"
+    }
 
+    It 'Tests -MatchExactly Test will fail' {
+        "I am a value" | Should -MatchExactly "I Am"
+    }
 
+    # To be honest, for both Should -Match and Should -MatchExactly I think the following is better
+
+    It 'Tests -match Test will pass' {
+        "I am a value" -Match "I Am" | Should -Be $true
+    }
 
 
     
@@ -401,12 +412,5 @@ Describe 'Should Assertion tests' {
     It 'Tests Should -FileContentMatchMultiline Test will pass' {
         Get-ChildItem -Path TestDrive:\file.txt | Should -FileContentMatchMultiline '^I am the first.*\n.*second line\.$'
     }
-
-
-
-
-
-
-
     
 }
