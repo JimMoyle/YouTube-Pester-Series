@@ -10,13 +10,15 @@
 
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path) -replace '\.Tests\.', '.'
-. '$here\$sut'
+#. '$here\$sut'
 
 Get-Help Should
 
 # Should docs https://github.com/pester/Pester/wiki/Should
 
 Describe 'Should Assertion tests' {
+
+    #New Theme?  Should work for red/green colourblind people which constitutes 8% of men
 
     #Old Formatting pre pester 4.0 remember Pester is 3.4 without upgrading
 
@@ -96,6 +98,7 @@ Describe 'Should Assertion tests' {
 
     # Should -BeGreaterOrEqual
     # Uses PowerShell's -ge operator to compare the two values.
+
     It 'Tests Should -BeGreaterOrEqual: Test will pass' {
         2 | Should -BeGreaterOrEqual 0
     }
@@ -106,6 +109,7 @@ Describe 'Should Assertion tests' {
 
     # Should -BeIn
     # Asserts that the actual value is contained by the array/collection
+
     It 'Tests Should -BeIn: Test will pass' {
         'b' | Should -BeIn @('a', 'b', 'c')
     }
@@ -312,7 +316,6 @@ Describe 'Should Assertion tests' {
     It 'Tests -match Test will fail' {
         "I am a value" | Should -Match "I am a bad person"
     }
-
 
     # In the docs, there is the following tip......
     # Tip: Use [regex]::Escape("pattern") to match the exact text.
