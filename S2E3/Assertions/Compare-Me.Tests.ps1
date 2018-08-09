@@ -10,56 +10,56 @@
 
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path) -replace '\.Tests\.', '.'
-. "$here\$sut"
+. '$here\$sut'
 
 Get-Help Should
 
 # Should docs https://github.com/pester/Pester/wiki/Should
 
-Describe "Should Assertion tests" {
+Describe 'Should Assertion tests' {
 
-    #Old Formatting
+    #Old Formatting pre pester 4.0 remember Pester is 3.4 without upgrading
 
-    It "Tests Negation: Test will pass" {
+    It 'Tests Negation: Test will pass' {
         $true | Should Be $true
     }
 
 
     #negate anything
 
-    It "Tests Negation: Test will pass" {
+    It 'Tests Negation: Test will pass' {
         $true | Should -Be $true
     }
 
-    It "Tests Negation: Test will pass" {
+    It 'Tests Negation: Test will pass' {
         $true | Should -Not -Be $false
     }
 
     # Should -Be
 
-    $actual = "Actual value"
+    $actual = 'Actual value'
 
-    It "Tests Should -Be: Test will pass" {
-        $actual | Should -Be "actual value"
+    It 'Tests Should -Be: Test will pass' {
+        $actual | Should -Be 'actual value'
     }
 
-    It "Tests Should -Be: Test will fail" {
-        $actual | Should -Be "not actual value"
+    It 'Tests Should -Be: Test will fail' {
+        $actual | Should -Be 'not actual value'
     }
 
      # Should -BeExactly
 
-    It "Tests Should -BeExactly: Test will pass" {
-        $actual | Should -BeExactly "Actual value" 
+    It 'Tests Should -BeExactly: Test will pass' {
+        $actual | Should -BeExactly 'Actual value' 
     }
 
-    It "Tests Should -BeExactly: Test will fail" {
-        $actual | Should -BeExactly "not actual value"
+    It 'Tests Should -BeExactly: Test will fail' {
+        $actual | Should -BeExactly 'not actual value'
     }
 
     # Should -BeGreaterThan
 
-    It "Tests Should -BeGreaterThan: Test will pass" {
+    It 'Tests Should -BeGreaterThan: Test will pass' {
         $Error.Count | Should -BeGreaterThan 0
     }
 
@@ -70,92 +70,92 @@ Describe "Should Assertion tests" {
     (Get-Date).AddMinutes(5) -gt (Get-Date)
     7, 8, 9 -gt 8
 
-    It "Tests Should -BeGreaterThan: Test will fail" {
+    It 'Tests Should -BeGreaterThan: Test will fail' {
         'Peter' | Should -BeGreaterThan 'Paul'
     }
 
-    It "Tests Should -BeGreaterThan: Test will pass" {
+    It 'Tests Should -BeGreaterThan: Test will pass' {
         'Paul' | Should -BeGreaterThan 'Peter'
     }
 
-    It "Tests Should -BeGreaterThan: Test will pass" {
+    It 'Tests Should -BeGreaterThan: Test will pass' {
         [version]'2.3.4.5' | Should -BeGreaterThan ([version]'1.0.0.1')
     }
 
-    It "Tests Should -BeGreaterThan: Test will pass" {
+    It 'Tests Should -BeGreaterThan: Test will pass' {
         (Get-Date).AddMinutes(5) | Should -BeGreaterThan (Get-Date)
     }
 
-    It "Tests Should -BeGreaterThan: Test will fail" {
+    It 'Tests Should -BeGreaterThan: Test will fail' {
         7, 8, 9 | Should -BeGreaterThan 8
     }
 
-    It "Corrected test for '7, 8, 9 -gt 8': Test will pass" {
+    It 'Corrected test for '7, 8, 9 -gt 8': Test will pass' {
         7, 8, 9 -gt 8 | Should -Be 9
     }
 
     # Should -BeGreaterOrEqual
     # Uses PowerShell's -ge operator to compare the two values.
-    It "Tests Should -BeGreaterOrEqual: Test will pass" {
+    It 'Tests Should -BeGreaterOrEqual: Test will pass' {
         2 | Should -BeGreaterOrEqual 0
     }
 
-    It "Tests Should -BeGreaterOrEqual: Test will pass" {
+    It 'Tests Should -BeGreaterOrEqual: Test will pass' {
         2 | Should -BeGreaterOrEqual 2
     }
 
     # Should -BeIn
     # Asserts that the actual value is contained by the array/collection
-    It "Tests Should -BeIn: Test will pass" {
+    It 'Tests Should -BeIn: Test will pass' {
         'b' | Should -BeIn @('a', 'b', 'c')
     }
 
-    It "Tests Should -BeIn: Test will pass" {
+    It 'Tests Should -BeIn: Test will pass' {
         27 | Should -BeIn (1..100)
     }
 
     # Should -BeLessThan
     # Uses PowerShell's -lt operator to compare the two values.
-    It "Tests Should -BeLessThan: Test will pass" {
+    It 'Tests Should -BeLessThan: Test will pass' {
         $Error.Clear()
         $Error.Count | Should -BeLessThan 1
     }
 
     # Should -BeLessOrEqual
     # Uses PowerShell's -le operator to compare the two values.
-    It "Tests Should -BeLessOrEqual: Test will pass" {
+    It 'Tests Should -BeLessOrEqual: Test will pass' {
         1 | Should -BeLessOrEqual 10
     }
 
-    It "Tests Should -BeLessOrEqual: Test will pass" {
+    It 'Tests Should -BeLessOrEqual: Test will pass' {
         10 | Should -BeLessOrEqual 10
     }
 
     # Should -BeLike
     # Uses PowerShell's -like operator to compare the two values.
 
-    $actual = "Actual value"
+    $actual = 'Actual value'
 
-    It "Tests Should -BeLike: Test will pass" {
-        $actual | Should -BeLike "actual *"
+    It 'Tests Should -BeLike: Test will pass' {
+        $actual | Should -BeLike 'actual *'
     }
 
-    It "Tests Should -BeLike: Test will pass" {
-        $actual | Should -Not -BeLike "not actual *"
+    It 'Tests Should -BeLike: Test will pass' {
+        $actual | Should -Not -BeLike 'not actual *'
     }
 
     # Should -BeLikeExactly
     # Uses PowerShell's -clike operator to compare the two values.
     # This comparison is case-sensitive.
 
-    $actual = "Actual value"
+    $actual = 'Actual value'
 
-    It "Tests Should -BeLikeExactly: Test will pass" {
-        $actual | Should -BeLikeExactly "Actual *"
+    It 'Tests Should -BeLikeExactly: Test will pass' {
+        $actual | Should -BeLikeExactly 'Actual *'
     }
 
-    It "Tests Should -BeLikeExactly: Test will pass" {
-        $actual | Should -Not -BeLikeExactly "actual *"
+    It 'Tests Should -BeLikeExactly: Test will pass' {
+        $actual | Should -Not -BeLikeExactly 'actual *'
     }
 
     # Should -BeOfType
@@ -165,15 +165,15 @@ Describe "Should Assertion tests" {
     $actual = Get-Item $env:SystemRoot
     $actual.GetType()
 
-    It "Tests Should -BeOfType: Test will pass" {
+    It 'Tests Should -BeOfType: Test will pass' {
         $actual | Should -BeOfType [System.IO.DirectoryInfo]
     }
 
-    It "Tests Should -BeOfType: Test will pass" {
+    It 'Tests Should -BeOfType: Test will pass' {
         $actual | Should -BeOfType [System.IO.FileSystemInfo]
     }
 
-    It "Tests Should -BeOfType: Test will pass" {
+    It 'Tests Should -BeOfType: Test will pass' {
         $actual | Should -Not -BeOfType [System.IO.FileInfo]
     }
 
@@ -182,11 +182,11 @@ Describe "Should Assertion tests" {
         SomeName   = 'SomeValue'
     }
 
-    It "Tests Should -BeOfType: Test will fail" {
+    It 'Tests Should -BeOfType: Test will fail' {
         $customObject | Should -BeOfType [MadeUp.Type]
     }
 
-    It "Tests Should -BeOfType Sorta: Test will pass" {
+    It 'Tests Should -BeOfType Sorta: Test will pass' {
         $customObject.pstypenames.Item('0') | Should -Be 'MadeUp.Type'
     }
 
@@ -195,60 +195,112 @@ Describe "Should Assertion tests" {
     # Jeffery Snover on If
     # https://blogs.msdn.microsoft.com/powershell/2006/12/24/boolean-values-and-operators/
 
-    It "Tests Should -BeTrue: Test will pass" {
+    It 'Tests Should -BeTrue: Test will pass' {
         $true | Should -BeTrue
     }
 
-    It "Tests Should -BeTrue: Test will pass" {
+    It 'Tests Should -BeTrue: Test will pass' {
         1 | Should -BeTrue
     }
 
-    It "Tests Should -BeTrue: Test will pass" {
+    It 'Tests Should -BeTrue: Test will pass' {
         1, 2, 3 | Should -BeTrue
     }
 
-    It "Tests Should -BeTrue: Test will pass" {
+    It 'Tests Should -BeTrue: Test will pass' {
         Get-Process -Name 'Code' -ErrorAction SilentlyContinue | Should -BeTrue
     }
 
     # Do we need -BeTrue?
 
-    It "Tests Should -Be Test will pass" {
+    It 'Tests Should -Be Test will pass' {
         $true | Should -Be $true
     }
 
-    It "Tests Should -BeTrue: Test will pass" {
+    It 'Tests Should -BeTrue: Test will pass' {
         1 | Should -Be $true
     }
 
-    It "Tests Should -BeTrue: Test will pass" {
+    It 'Tests Should -BeTrue: Test will pass' {
         1, 2, 3 | Should -Be $true
     }
 
-    It "Tests Should -BeTrue: Test will pass" {
+    It 'Tests Should -BeTrue: Test will pass' {
         Get-Process -Name 'Code' -ErrorAction SilentlyContinue | Should -Be $true
     }
 
     # Should -BeFalse
 
-    It "Tests Should -BeFalse: Test will pass" {
+    It 'Tests Should -BeFalse: Test will pass' {
         $false | Should -BeFalse
     }
 
-    It "Tests Should -BeFalse: Test will pass" {
+    It 'Tests Should -BeFalse: Test will pass' {
         0 | Should -BeFalse
     }
 
-    It "Tests Should -BeFalse: Test will pass" {
+    It 'Tests Should -BeFalse: Test will pass' {
         $null | Should -BeFalse
     }
 
     # Not using if here, just picking up the exception
-    It "Tests Should -BeFalse Get-Process -Name 'NotExist': Test will pass" {
+    It 'Tests Should -BeFalse Get-Process -Name 'NotExist': Test will pass' {
         Get-Process -Name 'NotExist' | Should -BeFalse
     }    
 
     # Should -HaveCount
-    
+    # Uses the count property of the object
+    It 'Tests Should -HaveCount: Test will pass' {
+        1, 2, 3 | Should -HaveCount 3
+    }
 
+    $value = 'JimMoyle'
+
+    It 'Tests Should -HaveCount: Test will pass' {
+        $value| Should -HaveCount 1
+    }
+
+    It 'Tests Should -HaveCount: Test will fail' {
+        $notVariable | Should -HaveCount 0
+    }
+
+    It 'Tests Should -HaveCount: Test will pass' {
+        $notVariable | Should -HaveCount 1
+    }
+
+    # https://github.com/pester/Pester/issues/1000
+
+    It 'Tests Should -HaveCount: Test will pass' {
+        ($notVariable | Measure-Object).count | Should -Be 0
+    }
+
+    # Should -Contain
+    # Uses PowerShell's -contains operator.
+
+    It 'Tests Should -Contain: Test will pass' {
+        'a', 'b', 'c' | Should -Contain b
+    }
+
+    It 'Tests Should -Contain: Test will pass' {
+        1..100 | Should -Contain 42
+    }
+
+    # Should -Exist    
+    # Uses PowerShell's Test-Path Command.
+
+    $actual = (Get-ChildItem . )[0].FullName
+
+    It 'Tests Should -Exist Test will pass' {
+        $actual | Should -Exist
+    }
+
+    #For Paths with wildcard characters
+
+    It 'Tests Paths with widcards Test will pass' {
+        Test-Path -LiteralPath $actual | Should -Be $true
+    }
+    
+  
+
+    
 }
