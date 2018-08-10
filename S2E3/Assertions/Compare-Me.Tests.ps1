@@ -18,16 +18,17 @@ Get-Help Should
 
 Describe 'Should Assertion tests' {
 
-    #New Theme?  Should work for red/green colourblind people which constitutes 8% of men
+    # New Theme?  Should work for red/green colourblind people which constitutes 8% of men
+    # If you know how to change the Break Point colour in VS Code, without editing the CSS let me know in the comments
 
-    #Old Formatting pre pester 4.0 remember Pester is 3.4 without upgrading
+    # Old Formatting pre pester 4.0 remember Pester is 3.4 without upgrading
 
     It 'Tests Negation: Test will pass' {
         $true | Should Be $true
     }
 
 
-    #negate anything
+    # Negate anything
 
     It 'Tests Negation: Test will pass' {
         $true | Should -Be $true
@@ -37,6 +38,7 @@ Describe 'Should Assertion tests' {
         $true | Should -Not -Be $false
     }
 
+    # *************************************************
     # Should -Be
 
     $actual = 'Actual value'
@@ -49,6 +51,7 @@ Describe 'Should Assertion tests' {
         $actual | Should -Be 'not actual value'
     }
 
+    # *************************************************
      # Should -BeExactly
 
     It 'Tests Should -BeExactly: Test will pass' {
@@ -59,6 +62,7 @@ Describe 'Should Assertion tests' {
         $actual | Should -BeExactly 'not actual value'
     }
 
+    # *************************************************
     # Should -BeGreaterThan
 
     It 'Tests Should -BeGreaterThan: Test will pass' {
@@ -96,6 +100,7 @@ Describe 'Should Assertion tests' {
         7, 8, 9 -gt 8 | Should -Be 9
     }
 
+    # *************************************************
     # Should -BeGreaterOrEqual
     # Uses PowerShell's -ge operator to compare the two values.
 
@@ -107,6 +112,7 @@ Describe 'Should Assertion tests' {
         2 | Should -BeGreaterOrEqual 2
     }
 
+    # *************************************************
     # Should -BeIn
     # Asserts that the actual value is contained by the array/collection
 
@@ -118,15 +124,19 @@ Describe 'Should Assertion tests' {
         27 | Should -BeIn (1..100)
     }
 
+    # *************************************************
     # Should -BeLessThan
     # Uses PowerShell's -lt operator to compare the two values.
+
     It 'Tests Should -BeLessThan: Test will pass' {
         $Error.Clear()
         $Error.Count | Should -BeLessThan 1
     }
 
+    # *************************************************
     # Should -BeLessOrEqual
     # Uses PowerShell's -le operator to compare the two values.
+
     It 'Tests Should -BeLessOrEqual: Test will pass' {
         1 | Should -BeLessOrEqual 10
     }
@@ -135,6 +145,7 @@ Describe 'Should Assertion tests' {
         10 | Should -BeLessOrEqual 10
     }
 
+    # *************************************************
     # Should -BeLike
     # Uses PowerShell's -like operator to compare the two values.
 
@@ -148,6 +159,7 @@ Describe 'Should Assertion tests' {
         $actual | Should -Not -BeLike 'not actual *'
     }
 
+    # *************************************************
     # Should -BeLikeExactly
     # Uses PowerShell's -clike operator to compare the two values.
     # This comparison is case-sensitive.
@@ -162,6 +174,7 @@ Describe 'Should Assertion tests' {
         $actual | Should -Not -BeLikeExactly 'actual *'
     }
 
+    # *************************************************
     # Should -BeOfType
     # Uses PowerShell's -clike operator to compare the two values.
     # This comparison is case-sensitive.
@@ -194,6 +207,7 @@ Describe 'Should Assertion tests' {
         $customObject.pstypenames.Item('0') | Should -Be 'MadeUp.Type'
     }
 
+    # *************************************************
     # Should -BeTrue
     # Uses If(){} from PowerShell under the hud
     # Jeffery Snover on If
@@ -233,6 +247,7 @@ Describe 'Should Assertion tests' {
         Get-Process -Name 'Code' -ErrorAction SilentlyContinue | Should -Be $true
     }
 
+    # *************************************************
     # Should -BeFalse
 
     It 'Tests Should -BeFalse: Test will pass' {
@@ -252,6 +267,7 @@ Describe 'Should Assertion tests' {
         Get-Process -Name 'NotExist' | Should -BeFalse
     }    
 
+    # *************************************************
     # Should -HaveCount
     # Uses the count property of the object
     It 'Tests Should -HaveCount: Test will pass' {
@@ -278,6 +294,7 @@ Describe 'Should Assertion tests' {
         ($notVariable | Measure-Object).count | Should -Be 0
     }
 
+    # *************************************************
     # Should -Contain
     # Uses PowerShell's -contains operator.
 
@@ -289,6 +306,7 @@ Describe 'Should Assertion tests' {
         1..100 | Should -Contain 42
     }
 
+    # *************************************************
     # Should -Exist    
     # Uses PowerShell's Test-Path Command.
 
@@ -304,7 +322,56 @@ Describe 'Should Assertion tests' {
         Test-Path -LiteralPath $actual | Should -Be $true
     }
 
+    # *************************************************
+    # Should -BeNullOrEmpty 
+    # Uses .NET [String]::IsNullOrEmpty() method
 
+    It 'Tests -BeNullOrEmpty Test will pass' {
+        $null | Should -BeNullOrEmpty
+    }
+
+    It 'Tests -BeNullOrEmpty Test will pass' {
+        @() | Should -BeNullOrEmpty
+    }
+
+    It 'Tests -BeNullOrEmpty Test will pass' {
+        "" | Should -BeNullOrEmpty
+    }
+
+    # *************************************************
+    # Should -Throw
+    # Needs to be a script block before the pipeline
+
+    It 'Tests -Throw Test will pass' {
+        { foo } | Should -Throw
+    }
+
+    It 'Tests -Throw Test will fail' {
+        { $foo = 1 } | Should -Throw
+    }
+
+    # It's always best to match the exception message to make sure the exception you are intending to catch is the one that you are getting
+
+    It 'Tests -Throw Test will fail' {
+        { throw "This is a test" } | Should -Throw "This is a test"
+    }
+
+    # The exception message match is a substring match, so the following assertion will pass:
+
+    It 'Tests -Throw Test will fail' {
+        {throw "foo bar baz"} | Should -Throw "bar"
+    }
+
+    # Should -Not -Throw is largely redundant
+    # Pester fails any test if there is an exception
+    # I only use this as I'm developing a function as single base check as I'm writing, but as soon as the function becomes defined I'll use proper Pester tests
+
+    It 'Tests -Throw Test will fail' {
+        { $foo = 1 } | Should -Not -Throw
+    }
+
+
+    # *************************************************
     # Should -Match
     # Uses PowerShell's -match Operator under the hud.
     # Regular Expressions are powerful, but can be confusing, use if you know what you are doing
@@ -338,6 +405,7 @@ Describe 'Should Assertion tests' {
         "Greg" | Should -Be ".reg"
     }
 
+    # *************************************************
     # Should -MatchExactly
     # Uses PowerShell's -cmatch Operator under the hud.
 
@@ -356,7 +424,7 @@ Describe 'Should Assertion tests' {
     }
 
 
-    
+    # *************************************************
     # Should -FileContentMatch  
     # Uses PowerShell's -match Operator under the hud.
     # Don't worry about the 'TestDrive' you see, we'll cover it later
@@ -375,6 +443,7 @@ Describe 'Should Assertion tests' {
         'TestDrive:\file.txt' | Should -FileContentMatch 'I Am Not'
     }
 
+    # *************************************************
     # Should -FileContentMatchExactly
     # Uses PowerShell's -cmatch Operator under the hud.
     # Regular Expressions are *still* powerful, and can still be confusing, use if you know what you are doing
@@ -390,6 +459,7 @@ Describe 'Should Assertion tests' {
         'TestDrive:\file.txt' | Should -FileContentMatchExactly 'I Am'
     }
 
+    # *************************************************
     # Should -FileContentMatchMultiline
     # Uses PowerShell's -match Operator under the hud.
     # Gets the file into a single string rather than an an array of strings by using 'Get-Content $ActualValue -Delimiter ([char]0)'
