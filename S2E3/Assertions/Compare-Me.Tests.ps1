@@ -10,7 +10,7 @@
 
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path) -replace '\.Tests\.', '.'
-#. '$here\$sut'
+. $here\$sut
 
 Get-Help Should
 
@@ -23,7 +23,7 @@ Describe 'Should Assertion tests' {
 
     # Old Formatting pre pester 4.0 remember Pester is 3.4 without upgrading
 
-    It 'Tests Negation: Test will pass' {
+    It 'Tests Old Syntax: Test will pass' {
         $true | Should Be $true
     }
 
@@ -36,6 +36,13 @@ Describe 'Should Assertion tests' {
 
     It 'Tests Negation: Test will pass' {
         $true | Should -Not -Be $false
+    }
+
+    # Give a reason for anything -Because
+    # Ability to add additional colour on a failure, above and beyond expected vs Actual
+
+    It 'Tests Negation: Test will fail' {
+        $false | Should -Be $true -Because 'Honesty is the best policy'
     }
 
     # *************************************************
