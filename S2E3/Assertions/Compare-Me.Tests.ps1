@@ -7,6 +7,9 @@
 	===========================================================================
 #>
 
+# New Theme?  Should work for red/green colourblind people which constitutes 8% of men
+# If you know how to change the Break Point colour in VS Code, without editing the CSS let me know in the comments
+
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path) -replace '\.Tests\.', '.'
 . $here\$sut
@@ -16,9 +19,6 @@ Get-Help Should
 # Should docs https://github.com/pester/Pester/wiki/Should
 
 Describe 'Should Assertion tests' {
-
-    # New Theme?  Should work for red/green colourblind people which constitutes 8% of men
-    # If you know how to change the Break Point colour in VS Code, without editing the CSS let me know in the comments
 
     # Old Formatting pre pester 4.0 remember Pester is 3.4 without upgrading
 
@@ -102,7 +102,7 @@ Describe 'Should Assertion tests' {
         7, 8, 9 | Should -BeGreaterThan 8
     }
 
-    It 'Corrected test for '7, 8, 9 -gt 8': Test will pass' {
+    It 'Corrected test for "7, 8, 9 -gt 8": Test will pass' {
         7, 8, 9 -gt 8 | Should -Be 9
     }
 
@@ -269,7 +269,7 @@ Describe 'Should Assertion tests' {
     }
 
     # Not using if here, just picking up the exception
-    It 'Tests Should -BeFalse Get-Process -Name 'NotExist': Test will pass' {
+    It 'Tests Should -BeFalse Get-Process -Name "NotExist": Test will pass' {
         Get-Process -Name 'NotExist' | Should -BeFalse
     }    
 
@@ -491,8 +491,6 @@ Describe 'Should Assertion tests' {
         'TestDrive:\file.txt' | Should -FileContentMatchMultiline '^I am the first.*\n.*second line\.$'
     }
 
-    It 'Tests Should -FileContentMatchMultiline Test will pass' {
-        Get-ChildItem -Path TestDrive:\file.txt | Should -FileContentMatchMultiline '^I am the first.*\n.*second line\.$'
-    }
+    # End of Tests
     
 }
