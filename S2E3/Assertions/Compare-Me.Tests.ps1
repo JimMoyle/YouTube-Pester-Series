@@ -357,7 +357,8 @@ Describe 'Should Assertion tests' {
         { $foo = 1 } | Should -Throw
     }
 
-    # It's always best to match the exception message to make sure the exception you are intending to catch is the one that you are getting
+    # It's always best to match the exception message to make sure the exception you are intending 
+    #   to catch is the one that you are getting
 
     It 'Tests -Throw Test will fail' {
         { throw "This is a test" } | Should -Throw "This is a test"
@@ -371,7 +372,8 @@ Describe 'Should Assertion tests' {
 
     # Should -Not -Throw is largely redundant
     # Pester fails any test if there is an exception
-    # I only use this as I'm developing a function as single base check as I'm writing, but as soon as the function becomes defined I'll use proper Pester tests
+    # I only use this as I'm developing a function as single base check as I'm writing, 
+    #   but as soon as the function becomes defined I'll use proper Pester tests
 
     It 'Tests -Throw Test will fail' {
         { $foo = 1 } | Should -Not -Throw
@@ -473,7 +475,8 @@ Describe 'Should Assertion tests' {
     # Probably because Get-Content -Raw was introduced in PoSh 3.0
     # Man, if someone asked me to support PoSh 2.0, I'd tell them to take a long walk off a short pier.
     # Remember to enclose the path in quotes, or be an actual file object or PowerShell will try to invoke the path
-    # When using FileContentMatchMultiline operator, ^ and $ represent the beginning and end of the whole file, instead of the beginning and end of a line.
+    # When using FileContentMatchMultiline operator, ^ and $ represent the beginning and end of the whole file, 
+    #   instead of the beginning and end of a line.
 
     $lineOne = 'I am the first line.'
     $lineTwo = 'I am the second line.'
