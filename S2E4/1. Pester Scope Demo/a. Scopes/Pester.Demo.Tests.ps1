@@ -1,9 +1,11 @@
 ﻿$here = Split-Path -Parent $MyInvocation.MyCommand.Path | Split-Path -Parent
 $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path) -replace '\.Tests\.', '.'
 $sut = $sut -replace 'ps1', 'psm1'
+# Instead of dot sourcing a function, we'll import the module
 Import-Module -Name "$here\$sut" -Scope Local -Force
 
-Describe "Get-PesterScope" {
+
+Describe "Basic Test" {
 
     # PowerShell Scopes protect access to variables, aliases, functions, and PowerShell drives (PSDrives) by limiting where they can be read and changed.
 
@@ -12,8 +14,14 @@ Describe "Get-PesterScope" {
     }
 }
 
+# We are going to look at how modules can be tested
 
-Describe "Get-PesterScopeTwo" {
+# We shall also show Context blocks
+
+# We can see $sut and $here
+Write-Output $null
+
+Describe "Pester Scopes" {
 
     $describeScope = 'Set In Describe'
 
