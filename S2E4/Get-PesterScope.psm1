@@ -10,14 +10,9 @@
         [System.String]$StringVar
     )
 
-    BEGIN {
-        Set-StrictMode -Version Latest
-    } # Begin
-    PROCESS {
         Write-Output "Public Function $StringVar"
-    } #Process
-    END {} #End
-}  #function Show-PublicFuction
+
+}
 
 function Show-PrivateFuction {
     [CmdletBinding(PositionalBinding = $true)]
@@ -31,13 +26,8 @@ function Show-PrivateFuction {
         [System.String]$StringVar
     )
 
-    BEGIN {
-        Set-StrictMode -Version Latest
-    } # Begin
-    PROCESS {
         Write-Output "Private Function $StringVar"
-    } #Process
-    END {} #End
-}  #function Show-PrivateFuction
+
+}
 
 Export-ModuleMember -Function Show-PublicFuction

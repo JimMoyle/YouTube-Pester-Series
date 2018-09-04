@@ -1,6 +1,7 @@
-﻿$here = Split-Path -Parent $MyInvocation.MyCommand.Path
+﻿$here = Split-Path -Parent $MyInvocation.MyCommand.Path | Split-Path -Parent
 $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path) -replace '\.Tests\.', '.'
-. "$here\$sut"
+$sut = $sut -replace 'ps1', 'psm1'
+Import-Module -Name "$here\$sut" -Scope Local -Force
 
 Describe "Get-PesterScope" {
 
@@ -12,32 +13,41 @@ Describe "Get-PesterScope" {
 }
 
 
-Describe "Get-PesterScope" {
+Describe "Get-PesterScopeTwo" {
 
-    
     $describeScope = 'Set In Describe'
-    
-    
 
-    InModuleScope -ModuleName 'Blah' {
+    Write-Output $null
+    
+    InModuleScope -ModuleName $sut.TrimEnd('.psm1') {
 
         # Sessions, modules, and nested prompts are self-contained environments, but they are not child scopes of the global scope in the session.
-        Get-Variable -Scope local # No $here or $sut
 
         $moduleScope = 'Set In Module'
 
-        Context {
+        Write-Output $null
+
+        Context 'Show Context Scope' {
 
             $contextScope = 'Set In Context'
+
+            Write-Output $null
 
             It "does something useful" {
 
                 $itScope = 'Set In It'
 
-                Get-Variable -Scope local # No $here or $sut
+                Write-Output $null
 
                 $true | Should -Be $true
             }
         }
     }
 }
+
+Write-Output $here
+Write-Output $sut
+Write-Output $describeScope
+Write-Output $moduleScope
+Write-Output $contextScope
+Write-Output $itScope
