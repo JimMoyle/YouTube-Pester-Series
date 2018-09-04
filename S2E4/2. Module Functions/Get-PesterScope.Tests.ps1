@@ -9,17 +9,16 @@ Describe "Get-Module Scope" {
  
     InModuleScope -ModuleName $sut.TrimEnd('.psm1') {
 
-        It "Tests Show-PublicFuction" {
+        It "Tests Show-PublicFunction" {
 
             Show-PublicFuction 'TestMe' | Should -Be "Public Function TestMe"
 
         }
 
-        It "Tests Show-PrivateFuction" {
+        It "Tests Show-PrivateFunction" {
 
             Show-PrivateFuction 'TestMe' | Should -Be "Private Function TestMe"
             
         }
-        
-    }
+     }
 }
