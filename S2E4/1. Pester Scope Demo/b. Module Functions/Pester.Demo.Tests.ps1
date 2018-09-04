@@ -11,13 +11,13 @@ Describe "Get-Module Scope" {
 
         It "Tests Show-PublicFunction" {
 
-            Show-PublicFuction 'TestMe' | Should -Be "Public Function TestMe"
+            Show-PublicFunction 'TestMe' | Should -Be "Public Function TestMe"
 
         }
 
         It "Tests Show-PrivateFunction" {
 
-            Show-PrivateFuction 'TestMe' | Should -Be "Private Function TestMe"
+            Show-PrivateFunction 'TestMe' | Should -Be "Private Function TestMe"
             
         }
      }
