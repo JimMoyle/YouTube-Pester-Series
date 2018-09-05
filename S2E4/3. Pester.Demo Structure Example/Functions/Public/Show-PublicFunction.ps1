@@ -1,5 +1,5 @@
 function Show-PublicFunction {
-    [CmdletBinding(PositionalBinding = $true)]
+    [CmdletBinding()]
 
     Param (
         [Parameter(

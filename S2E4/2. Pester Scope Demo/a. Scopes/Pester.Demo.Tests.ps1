@@ -16,8 +16,6 @@ Describe "Basic Test" {
 
 # We are going to look at how modules can be tested
 
-# We shall also show Context blocks
-
 # We can see $sut and $here
 Write-Output $null
 

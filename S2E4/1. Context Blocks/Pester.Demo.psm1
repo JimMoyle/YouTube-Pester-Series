@@ -1,5 +1,5 @@
 ﻿function Show-PublicFunction {
-    [CmdletBinding(PositionalBinding = $true)]
+    [CmdletBinding()]
 
     Param (
         [Parameter(
@@ -15,7 +15,7 @@
 }
 
 function Show-PrivateFunction {
-    [CmdletBinding(PositionalBinding = $true)]
+    [CmdletBinding()]
 
     Param (
         [Parameter(
