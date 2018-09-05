@@ -1,5 +1,5 @@
 ﻿function Show-PublicFunction {
-    [CmdletBinding(PositionalBinding=$true)]
+    [CmdletBinding(PositionalBinding = $true)]
 
     Param (
         [Parameter(
@@ -10,7 +10,7 @@
         [System.String]$StringVar
     )
 
-        Write-Output "Public Function $StringVar"
+    Write-Output "Public Function $StringVar"
 
 }
 
@@ -26,7 +26,7 @@ function Show-PrivateFunction {
         [System.String]$StringVar
     )
 
-        Write-Output "Private Function $StringVar"
+    Write-Output "Private Function $StringVar"
 
 }
 
