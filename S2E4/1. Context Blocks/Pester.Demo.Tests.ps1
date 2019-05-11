@@ -29,6 +29,6 @@ Describe "Context Block Demo" {
         # Properties, Values, Types
     }
 
-    # You can also use context blocks to keep scopes separate for Mocking and the TestDrive (covered in a later episode)
+    # You can also use context blocks to keep scopes separate for Mocking and the TestDrive (both covered in a later episode)
  
 }
