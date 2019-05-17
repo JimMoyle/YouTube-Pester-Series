@@ -37,4 +37,18 @@ Describe "TestDrive Scopes" {
             Test-Path TestDrive:\Context2.txt | Should -Be true
         }
     }
+
+    Context 'TestDrive manipulation' {
+        
+        Rename-Item TestDrive:\DescribeScope.txt ReNamed.txt
+
+        It 'Should have renamed the key' {
+            
+            Test-Path TestDrive:\ReNamed.txt | Should -Be true
+        }
+    }
+
+    It 'Should NOT have a describe scope key' {
+        Test-Path TestDrive:\DescribeScope.txt | Should -Be false
+    }
  }
