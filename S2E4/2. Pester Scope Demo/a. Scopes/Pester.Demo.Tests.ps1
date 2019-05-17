@@ -10,6 +10,8 @@ Describe "Pester Scopes" {
 
     $describeScope = 'Set In Describe'
 
+    #You can do InModuleScope before describe, and some docs show that, but I don't like it as it removes functionality from describe (tags)
+
     InModuleScope -ModuleName $sut.TrimEnd('.psm1') {
 
         # Sessions, modules, and nested prompts are self-contained environments, but they are not child scopes of the global scope in the session.
