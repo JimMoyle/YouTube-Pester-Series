@@ -38,17 +38,20 @@ Describe "TestRegistry Scopes" {
         }
     }
 
-    Context 'TestRegistry manipulation'{
+    Context 'TestRegistry manipulation' {
         
-        Rename-Item TestRegistry:\Describe ReNamed
+        Rename-Item TestRegistry:\Describe Renamed
 
-        It 'Should have renamed the key'{
-            
-            Test-Path TestRegistry:\ReNamed | Should -Be true
+        It 'Should have renamed the key' {         
+            Test-Path TestRegistry:\Renamed | Should -Be true
         }
     }
 
     It 'Should NOT have a describe scope key' {
         Test-Path TestRegistry:\Describe | Should -Be false
     }
- }
+
+    It 'Should have renamed the key' {  
+        Test-Path TestRegistry:\Renamed | Should -Be true
+    }
+}

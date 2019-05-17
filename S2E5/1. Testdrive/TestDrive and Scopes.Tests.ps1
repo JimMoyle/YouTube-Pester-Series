@@ -42,13 +42,16 @@ Describe "TestDrive Scopes" {
         
         Rename-Item TestDrive:\DescribeScope.txt ReNamed.txt
 
-        It 'Should have renamed the key' {
-            
-            Test-Path TestDrive:\ReNamed.txt | Should -Be true
+        It 'Should have renamed the file' {      
+            Test-Path TestDrive:\Renamed.txt | Should -Be true
         }
     }
 
-    It 'Should NOT have a describe scope key' {
+    It 'Should NOT have a describe scope file' {
         Test-Path TestDrive:\DescribeScope.txt | Should -Be false
+    }
+
+    It 'Should NOT have a renamed scope file' {
+        Test-Path TestDrive:\Renamed.txt | Should -Be false
     }
  }
