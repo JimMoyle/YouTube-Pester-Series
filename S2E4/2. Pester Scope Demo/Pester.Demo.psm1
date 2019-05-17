@@ -7,7 +7,7 @@
             ValuefromPipeline = $true,
             Mandatory = $true
         )]
-        [System.String]$StringVar
+        [String]$StringVar
     )
 
     Write-Output "Public Function $StringVar"
@@ -23,7 +23,7 @@ function Show-PrivateFunction {
             ValuefromPipeline = $true,
             Mandatory = $true
         )]
-        [System.String]$StringVar
+        [String]$StringVar
     )
 
     Write-Output "Private Function $StringVar"
