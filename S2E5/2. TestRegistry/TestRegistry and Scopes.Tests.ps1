@@ -51,7 +51,7 @@ Describe "TestRegistry Scopes" {
         Test-Path TestRegistry:\Describe | Should -Be false
     }
 
-    It 'Should have renamed the key' {  
-        Test-Path TestRegistry:\Renamed | Should -Be true
+    It 'Should NOT have a renamed key' {  
+        Test-Path TestRegistry:\Renamed | Should -Be false
     }
 }
