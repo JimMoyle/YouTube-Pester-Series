@@ -1,0 +1,5 @@
+"TimeStamp"	"Level"	"Message"
+"2019-05-29 19:33:48"	"INFO:   "	"Test Information Message"
+"2019-05-29 19:34:20"	"WARNING:"	"Test Warning Message"
+"2019-05-29 19:34:34"	"DEBUG:  "	"Test Debug Message"
+"2019-05-29 19:35:16"	"ERROR:  "	"Cannot find path 'Z:\notexist' because it does not exist."
